@@ -1,2 +1,2 @@
 # attendance
-Attendance system by Sagar
+Attendance system by Sagar Nerella.
