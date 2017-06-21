@@ -1,7 +1,5 @@
 package com.sureit.admin.attendance.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,24 +8,24 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sureit.admin.attendance.model.Employee;
-import com.sureit.admin.attendance.model.EmployeeLogin;
+import com.sureit.admin.attendance.model.TimeSheetEntry;
 import com.sureit.admin.attendance.repository.IEmployeeDAO;
-import com.sureit.admin.attendance.repository.IEmployeeLoginDAO;
+import com.sureit.admin.attendance.repository.ITimeSheetEntryDAO;
 
 @Service("employeeService")
 public class EmployeeService {
 
 	@Autowired
 	private IEmployeeDAO employeeDAO;
-	
+
 	@Autowired
-	private IEmployeeLoginDAO employeeLoginDAO;
+	private ITimeSheetEntryDAO timeSheetEntryDAO;
 
 	public List<Employee> getAllEmployees() {
 		List<Employee> employeeList = null;
 		try {
 			employeeList = (List<Employee>) employeeDAO.findAll();
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 
 		}
 		return employeeList;
@@ -51,11 +49,21 @@ public class EmployeeService {
 				employeeDAO.save(emp);
 				status = true;
 			}
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 
 		}
 		return status;
+	}
+
+	public Employee fetchEmployeeByEmailAddress(String emailAddress) {
+		Employee employee = null;
+		try {
+			employee = employeeDAO.findByEmailAddress(emailAddress);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return employee;
 	}
 
 	public boolean deleteEmployeeBasedOnEmpId(int id) {
@@ -69,21 +77,26 @@ public class EmployeeService {
 		}
 		return status;
 	}
-	
-	public boolean employeeLogin(int id){
-		boolean status = false;
-		try{
+
+	public String createTimeSheetEntry(int id) {
+		String status = null;
+		TimeSheetEntry empLogin = null;
+		try {
 			Employee emp = getEmployeeBasedOnEmpId(id);
-			if(emp!=null){
-				EmployeeLogin empLogin = employeeLoginDAO.findByEmpidAndLoginDateTime(id, new Date());
-				if(empLogin == null){
-					empLogin = new EmployeeLogin(id, new Date(), new SimpleDateFormat("MMM").format(Calendar.getInstance().getTime()));
-					employeeLoginDAO.save(empLogin);
-					status = true;
+			if (emp != null) {
+				empLogin = timeSheetEntryDAO.findByEmpidAndLoginDateTime(id);
+				if (empLogin == null) {
+					empLogin = new TimeSheetEntry(id, new Date());
+					timeSheetEntryDAO.save(empLogin);
+					status = "Timesheet entry created successfully";
+				} else {
+					status = "Timesheet entry already exists for Employee id- " + id;
 				}
+			} else {
+				status = "Employee id- " + id + " does not exist. Please enter valid id";
 			}
-		}catch(DataAccessException e){
-			
+		} catch (Exception e) {
+
 		}
 		return status;
 	}

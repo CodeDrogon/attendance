@@ -12,9 +12,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "employee_login")
+@Table(name = "timesheet_entry")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class EmployeeLogin {
+public class TimeSheetEntry {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,18 +24,15 @@ public class EmployeeLogin {
 	private int empid;
 	@Column(name = "login_Date_Time")
 	private Date loginDateTime;
-	@Column(name = "month")
-	private String month;
 
-	public EmployeeLogin(){
-		
+	public TimeSheetEntry() {
+
 	}
-	
-	public EmployeeLogin(int empid, Date loginDateTime, String month) {
+
+	public TimeSheetEntry(int empid, Date loginDateTime) {
 		super();
 		this.empid = empid;
 		this.loginDateTime = loginDateTime;
-		this.month = month;
 	}
 
 	/**
@@ -81,14 +78,6 @@ public class EmployeeLogin {
 	 */
 	public void setLoginDateTime(Date loginDateTime) {
 		this.loginDateTime = loginDateTime;
-	}
-
-	public String getMonth() {
-		return month;
-	}
-
-	public void setMonth(String month) {
-		this.month = month;
 	}
 
 }

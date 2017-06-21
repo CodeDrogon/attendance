@@ -1,7 +1,5 @@
 package com.sureit.admin.attendance;
 
-import java.util.Arrays;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,13 +26,5 @@ public class AttendanceApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(AttendanceApplication.class, args);
-
-		String[] beanNames = ctx.getBeanDefinitionNames();
-
-		Arrays.sort(beanNames);
-
-		for (String beanName : beanNames) {
-			System.out.println(beanName);
-		}
 	}
 }
