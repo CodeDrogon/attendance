@@ -56,6 +56,18 @@ public class EmployeeService {
 		return status;
 	}
 
+	public boolean updateEmployee(Employee emp) {
+		boolean status = false;
+		try {
+			employeeDAO.save(emp);
+			status = true;
+
+		} catch (Exception e) {
+
+		}
+		return status;
+	}
+
 	public Employee fetchEmployeeByEmailAddress(String emailAddress) {
 		Employee employee = null;
 		try {

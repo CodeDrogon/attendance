@@ -78,6 +78,21 @@ public class EmployeeController {
 	}
 
 	@CrossOrigin
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateEmployee")
+	public @ResponseBody Map<String, String> updateEmployee(@RequestBody(required = true) Employee employee) {
+
+		String status = null;
+		if (employeeService.updateEmployee(employee)) {
+			status = "Employee record updated successfully";
+		} else {
+			status = "Employee record updation falied";
+		}
+		Map<String, String> updateEmployeeStatusMap = new HashMap<String, String>();
+		updateEmployeeStatusMap.put("message", status);
+		return updateEmployeeStatusMap;
+	}
+
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST, value = "/createTimeSheetEntry/{employeeId}")
 	@Produces("application/json")
 	public @ResponseBody Map<String, String> createTimeSheetEntry(@PathVariable("employeeId") Integer employeeId) {

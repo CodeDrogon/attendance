@@ -30,7 +30,7 @@ public class Employee implements Serializable {
 	private String lastName;
 	@Column(name = "mobile_number")
 	private String mobileNumber;
-	@Column(name = "creation_date")
+	@Column(name = "creation_date", updatable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "IST")
 	private Date creationDate;
 
