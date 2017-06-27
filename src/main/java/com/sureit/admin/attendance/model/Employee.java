@@ -34,6 +34,20 @@ public class Employee implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "IST")
 	private Date creationDate;
 
+	public Employee() {
+
+	}
+
+	public Employee(int empId, String emailAddress, String firstName, String lastName, String moblieNumber,
+			Date creationDate) {
+		setEmpId(empId);
+		setEmailAddress(emailAddress);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setMobileNumber(moblieNumber);
+		setCreationDate(creationDate);
+	}
+
 	/**
 	 * @return the empId
 	 */
@@ -133,6 +147,52 @@ public class Employee implements Serializable {
 	public String toString() {
 		return "Employee [empId=" + empId + ", emailAddress=" + emailAddress + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", mobileNumber=" + mobileNumber + ", creationDate=" + creationDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
+		result = prime * result + empId;
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (emailAddress == null) {
+			if (other.emailAddress != null)
+				return false;
+		} else if (!emailAddress.equals(other.emailAddress))
+			return false;
+		if (empId != other.empId)
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (mobileNumber == null) {
+			if (other.mobileNumber != null)
+				return false;
+		} else if (!mobileNumber.equals(other.mobileNumber))
+			return false;
+		return true;
 	}
 
 }

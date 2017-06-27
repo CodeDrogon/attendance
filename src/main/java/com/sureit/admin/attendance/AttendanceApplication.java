@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class })
+@ComponentScan(basePackages = { "com.sureit.admin.attendance" })
 public class AttendanceApplication extends WebMvcConfigurerAdapter {
 
 	@Override

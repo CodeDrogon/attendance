@@ -18,8 +18,8 @@ public class TimeSheetEntry {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "login_id")
-	private int loginid;
+	@Column(name = "timesheetid")
+	private int timesheetId;
 	@Column(name = "empid")
 	private int empid;
 	@Column(name = "login_Date_Time")
@@ -29,53 +29,31 @@ public class TimeSheetEntry {
 
 	}
 
-	public TimeSheetEntry(int empid, Date loginDateTime) {
-		super();
-		this.empid = empid;
-		this.loginDateTime = loginDateTime;
+	public TimeSheetEntry(int empId, Date loginDateTime) {
+		setEmpid(empId);
+		setLoginDateTime(loginDateTime);
 	}
 
-	/**
-	 * @return the loginid
-	 */
-	public int getLoginid() {
-		return loginid;
+	public int getTimesheetId() {
+		return timesheetId;
 	}
 
-	/**
-	 * @param loginid
-	 *            the loginid to set
-	 */
-	public void setLoginid(int loginid) {
-		this.loginid = loginid;
+	public void setTimesheetId(int timesheetId) {
+		this.timesheetId = timesheetId;
 	}
 
-	/**
-	 * @return the empid
-	 */
 	public int getEmpid() {
 		return empid;
 	}
 
-	/**
-	 * @param empid
-	 *            the empid to set
-	 */
 	public void setEmpid(int empid) {
 		this.empid = empid;
 	}
 
-	/**
-	 * @return the loginDateTime
-	 */
 	public Date getLoginDateTime() {
 		return loginDateTime;
 	}
 
-	/**
-	 * @param loginDateTime
-	 *            the loginDateTime to set
-	 */
 	public void setLoginDateTime(Date loginDateTime) {
 		this.loginDateTime = loginDateTime;
 	}

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sureit.admin.attendance.model.Employee;
@@ -23,93 +22,56 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmployees() {
 		List<Employee> employeeList = null;
-		try {
-			employeeList = (List<Employee>) employeeDAO.findAll();
-		} catch (Exception e) {
+		employeeList = (List<Employee>) employeeDAO.findAll();
 
-		}
 		return employeeList;
 	}
 
 	public Employee getEmployeeBasedOnEmpId(int id) {
 		Employee employee = null;
-		try {
-			employee = employeeDAO.findOne(id);
-		} catch (DataAccessException e) {
+		employee = employeeDAO.findOne(id);
 
+		return employee;
+	}
+
+	public Employee createEmployee(Employee emp) {
+		Employee employee = null;
+		Employee employeeTemp = employeeDAO.findByEmailAddress(emp.getEmailAddress());
+		if (employeeTemp == null) {
+			employee = employeeDAO.save(emp);
 		}
 		return employee;
 	}
 
-	public boolean createEmployee(Employee emp) {
-		boolean status = false;
-		try {
-			Employee employeeTemp = employeeDAO.findByEmailAddress(emp.getEmailAddress());
-			if (employeeTemp == null) {
-				employeeDAO.save(emp);
-				status = true;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
+	public void updateEmployee(Employee emp) {
+		employeeDAO.save(emp);
 
-		}
-		return status;
-	}
-
-	public boolean updateEmployee(Employee emp) {
-		boolean status = false;
-		try {
-			employeeDAO.save(emp);
-			status = true;
-
-		} catch (Exception e) {
-
-		}
-		return status;
 	}
 
 	public Employee fetchEmployeeByEmailAddress(String emailAddress) {
 		Employee employee = null;
-		try {
-			employee = employeeDAO.findByEmailAddress(emailAddress);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		employee = employeeDAO.findByEmailAddress(emailAddress);
+
 		return employee;
 	}
 
-	public boolean deleteEmployeeBasedOnEmpId(int id) {
-		boolean status = false;
-		try {
-			employeeDAO.delete(id);
-			status = true;
-		} catch (DataAccessException e) {
-			// TODO: handle exception
-
-		}
-		return status;
+	public void deleteEmployeeBasedOnEmpId(int id) {
+		employeeDAO.delete(id);
 	}
 
-	public String createTimeSheetEntry(int id) {
+	public String createTimeSheetEntry(int id) throws Exception {
 		String status = null;
 		TimeSheetEntry empLogin = null;
-		try {
-			Employee emp = getEmployeeBasedOnEmpId(id);
-			if (emp != null) {
-				empLogin = timeSheetEntryDAO.findByEmpidAndLoginDateTime(id);
-				if (empLogin == null) {
-					empLogin = new TimeSheetEntry(id, new Date());
-					timeSheetEntryDAO.save(empLogin);
-					status = "Timesheet entry created successfully";
-				} else {
-					status = "Timesheet entry already exists for Employee id- " + id;
-				}
-			} else {
-				status = "Employee id- " + id + " does not exist. Please enter valid id";
-			}
-		} catch (Exception e) {
 
+		empLogin = timeSheetEntryDAO.findByEmpidAndLoginDateTime(id);
+		if (empLogin == null) {
+			empLogin = new TimeSheetEntry(id, new Date());
+			timeSheetEntryDAO.save(empLogin);
+			status = "Timesheet entry created successfully";
 		}
+
 		return status;
 	}
+
 }
