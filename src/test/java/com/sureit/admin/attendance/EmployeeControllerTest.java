@@ -16,30 +16,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sureit.admin.attendance.AttendanceApplication;
 import com.sureit.admin.attendance.controller.EmployeeController;
 import com.sureit.admin.attendance.model.Employee;
 import com.sureit.admin.attendance.service.EmployeeService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AttendanceApplication.class)
-@SpringBootTest
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(MockitoJUnitRunner.class)
 public class EmployeeControllerTest {
 
 	private MockMvc mockMvc;
