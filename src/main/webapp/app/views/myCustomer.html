@@ -1,0 +1,17 @@
+<h2>Customer Detailes</h2>
+<table>
+<tr>
+<th ng-click="doSort('name')">Name</th>
+<th ng-click="doSort('city')">Location</th>
+<th ng-click="doSort('orderTotal')">order Total</th>
+<th ng-click="doSort('joined')">date</th>
+</tr>
+<tr ng-repeat="cust in customers | orderBy:sortBy:reverse">
+<td>{{cust.name | uppercase}}</td>
+<td>{{cust.city | lowercase}}</td>
+<td>{{cust.orderTotal | currency }}</td>
+<td>{{cust.joined}}</td>
+<td><a href="#/orders/{{cust.id}}">View orders</a></td>
+<td><a href="#/remove/{{cust.id}}">Remove orders</a></td>
+</tr>
+</table>

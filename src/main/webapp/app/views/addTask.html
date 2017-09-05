@@ -1,0 +1,59 @@
+
+
+<body>
+
+    <!-- Buttons and links -->
+
+    <a id="via-service" href="" ng-click="open()">Open via service</a>
+    
+
+    <!-- Templates -->
+
+    <script type="text/ng-template" id="firstDialogId">
+        <div id="add-task-panel" class="fadein fadeout addpanel panel" ng-hide="toggle">
+		
+		<div class="panel-body">
+			<div class="task" >
+				<table class="add-task">
+					<tr>
+						<td>Task Name:</td>
+						<td><input type="text" ng-model="taskName"/></td>
+					</tr>
+					<tr>
+						<td>Task Description:</td>
+						<td><input type="text" ng-model="taskDescription"/></td>
+					</tr>
+					<tr>
+						<td>Task Status:</td>
+						<td>
+							<select ng-model="taskStatus" ng-options="status as status for status in statuses">
+								<option value="">-- Select --</option>						
+						     	</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Task Priority:</td>
+						<td>
+							<select ng-model="taskPriority" ng-options="priority as priority for priority in priorities">
+								<option value="">-- Select --</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><br/><button ng-click="addTask()" class="btn-panel-big">Add New Task</button></td>
+					</tr>
+				</table>								
+			</div>
+		</div>
+	</div>
+        
+    </script>
+
+    
+
+    <!-- Scripts -->
+    
+
+    <!-- App -->
+    
+</body>
